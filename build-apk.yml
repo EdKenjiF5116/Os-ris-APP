@@ -1,0 +1,154 @@
+name: Build APK
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar arquivos do repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Instalar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Conferir se os arquivos necessarios existem
+        run: |
+          test -f index.html || { echo "FALTA: index.html na raiz do repositorio"; exit 1; }
+          test -f native-bridge.js || { echo "FALTA: native-bridge.js na raiz do repositorio"; exit 1; }
+          echo "Arquivos encontrados."
+
+      - name: Criar projeto Capacitor
+        run: |
+          npm init -y
+          npm install \
+            @capacitor/core@8 \
+            @capacitor/cli@8 \
+            @capacitor/android@8 \
+            @capacitor/app@8 \
+            @capacitor/status-bar@8 \
+            @capgo/capacitor-nfc@8
+
+          cat > capacitor.config.json <<'FIM'
+          {
+            "appId": "br.com.osiris.prontuario",
+            "appName": "Osiris",
+            "webDir": "www",
+            "android": {
+              "allowMixedContent": false,
+              "backgroundColor": "#020617"
+            }
+          }
+          FIM
+
+      - name: Montar a pasta www
+        run: |
+          mkdir -p www
+          cp index.html www/index.html
+          cp native-bridge.js www/native-bridge.js
+          python3 - <<'FIM'
+          import io
+          p = 'www/index.html'
+          s = io.open(p, encoding='utf-8').read()
+          tag = '<script src="native-bridge.js"></script>'
+          if tag not in s:
+              if '</body>' in s:
+                  s = s.replace('</body>', tag + '\n</body>', 1)
+              else:
+                  s = s + '\n' + tag + '\n'
+              io.open(p, 'w', encoding='utf-8').write(s)
+              print('Ponte nativa injetada.')
+          else:
+              print('Ponte ja estava presente.')
+          FIM
+
+      - name: Gerar projeto Android
+        run: npx cap add android
+
+      - name: Adicionar permissao de NFC ao manifesto
+        run: |
+          python3 - <<'FIM'
+          import io
+          p = 'android/app/src/main/AndroidManifest.xml'
+          s = io.open(p, encoding='utf-8').read()
+          alvo = '<uses-permission android:name="android.permission.INTERNET" />'
+          extra = alvo + '''
+
+              <uses-permission android:name="android.permission.NFC" />
+              <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
+              <queries>
+                  <intent>
+                      <action android:name="android.intent.action.DIAL" />
+                      <data android:scheme="tel" />
+                  </intent>
+              </queries>'''
+          if 'android.permission.NFC' not in s:
+              assert alvo in s, 'nao achei a permissao INTERNET no manifesto'
+              s = s.replace(alvo, extra, 1)
+              io.open(p, 'w', encoding='utf-8').write(s)
+              print('NFC adicionado ao manifesto.')
+          else:
+              print('NFC ja estava no manifesto.')
+          FIM
+
+      - name: Gerar icones (se icon.png existir)
+        run: |
+          if [ -f icon.png ]; then
+            npm install -D @capacitor/assets sharp
+            mkdir -p assets
+            node -e "
+              const sharp = require('sharp');
+              const V = '#0F6E56';
+              (async () => {
+                const med = await sharp('icon.png').resize(1024,1024,{fit:'contain',background:V}).png().toBuffer();
+                await sharp({create:{width:1024,height:1024,channels:4,background:V}})
+                  .composite([{input: await sharp(med).resize(820,820).toBuffer(), gravity:'center'}])
+                  .png().toFile('assets/icon.png');
+                await sharp({create:{width:1024,height:1024,channels:4,background:{r:0,g:0,b:0,alpha:0}}})
+                  .composite([{input: await sharp('icon.png').resize(614,614,{fit:'contain',background:{r:0,g:0,b:0,alpha:0}}).toBuffer(), gravity:'center'}])
+                  .png().toFile('assets/icon-foreground.png');
+                await sharp({create:{width:1024,height:1024,channels:4,background:V}}).png().toFile('assets/icon-background.png');
+              })();
+            "
+            npx capacitor-assets generate --android
+            echo "Icones gerados."
+          else
+            echo "icon.png nao enviado — usando o icone padrao do Capacitor."
+          fi
+
+      - name: Sincronizar
+        run: npx cap sync android
+
+      - name: Compilar o APK
+        run: |
+          chmod +x android/gradlew
+          cd android
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Separar o APK
+        run: |
+          mkdir -p artefato
+          cp android/app/build/outputs/apk/debug/app-debug.apk artefato/osiris.apk
+          ls -lh artefato/
+
+      - name: Publicar o APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: osiris-apk
+          path: artefato/osiris.apk
+          retention-days: 30
