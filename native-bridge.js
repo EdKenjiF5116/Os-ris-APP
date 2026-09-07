@@ -215,9 +215,12 @@
     return Promise.reject(nfcError('NotSupportedError', 'Escrita nao habilitada.'));
   };
 
-  if (!('NDEFReader' in window)) {
-    window.NDEFReader = NDEFReaderNative;
-  }
+  // O WebView do Android EXPOE window.NDEFReader (e Chromium), mas o
+  // Web NFC e bloqueado por politica de permissoes ali dentro: o .scan()
+  // lanca NotAllowedError. Por isso sobrescrevemos SEMPRE em nativo —
+  // checar "if (!('NDEFReader' in window))" faria a ponte nunca instalar.
+  window.NDEFReader = NDEFReaderNative;
+  window.__osirisNfc.impl = 'ponte-nativa';
 
   /* ── 2. Botao voltar do Android ─────────────────── */
 
@@ -309,7 +312,8 @@
       : Promise.resolve({});
 
     Promise.all([pStatus, pSup]).then(function (r) {
-      toast('plugin=' + (D.plugin ? 'ok' : 'AUSENTE') +
+      toast('impl=' + (D.impl || 'WEBVIEW') +
+            ' · plugin=' + (D.plugin ? 'ok' : 'AUSENTE') +
             ' · hw=' + (r[1].supported === undefined ? '?' : r[1].supported) +
             ' · status=' + r[0].status +
             ' · etapa=' + D.etapa +
