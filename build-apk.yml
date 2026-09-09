@@ -35,14 +35,10 @@ jobs:
       - name: Criar projeto Capacitor
         run: |
           npm init -y
-          npm install \
-            @capacitor/core@8 \
-            @capacitor/cli@8 \
-            @capacitor/android@8 \
-            @capacitor/app@8 \
-            @capacitor/status-bar@8 \
-            @capgo/capacitor-nfc@8 \
-            @capgo/capacitor-native-biometric@8
+          npm install @capacitor/core@8 @capacitor/cli@8 @capacitor/android@8 @capacitor/app@8 @capacitor/status-bar@8 @capgo/capacitor-nfc@8 @capgo/capacitor-native-biometric@8
+
+          echo "--- dependencias instaladas ---"
+          node -e "console.log(Object.keys(require('./package.json').dependencies).join('\n'))"
 
           cat > capacitor.config.json <<'FIM'
           {
