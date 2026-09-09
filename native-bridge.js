@@ -311,14 +311,25 @@
     var pSup = (Nfc && Nfc.isSupported)
       ? Nfc.isSupported().catch(function () { return {}; })
       : Promise.resolve({});
+    var pBio = Bio
+      ? Bio.isAvailable({ useFallback: true })
+          .then(function (r) {
+            return 'disp=' + r.isAvailable +
+                   ' tipo=' + r.biometryType +
+                   ' seguro=' + r.deviceIsSecure +
+                   (r.errorCode ? ' erro=' + r.errorCode : '');
+          })
+          .catch(function (e) { return 'CHAMADA FALHOU: ' + descreve(e); })
+      : Promise.resolve('PLUGIN AUSENTE');
 
-    Promise.all([pStatus, pSup]).then(function (r) {
-      toast('impl=' + (D.impl || 'WEBVIEW') +
-            ' · plugin=' + (D.plugin ? 'ok' : 'AUSENTE') +
-            ' · hw=' + (r[1].supported === undefined ? '?' : r[1].supported) +
-            ' · status=' + r[0].status +
-            ' · etapa=' + D.etapa +
-            (D.erro ? ' · erro=' + D.erro : ''));
+    Promise.all([pStatus, pSup, pBio]).then(function (r) {
+      toast('NFC: impl=' + (D.impl || 'WEBVIEW') +
+            ' plugin=' + (D.plugin ? 'ok' : 'AUSENTE') +
+            ' hw=' + (r[1].supported === undefined ? '?' : r[1].supported) +
+            ' status=' + r[0].status +
+            ' etapa=' + D.etapa +
+            (D.erro ? ' erro=' + D.erro : '') +
+            '  ||  BIO: ' + r[2]);
     });
   }, true);
 
@@ -330,6 +341,8 @@
 
   var Bio = plugin('NativeBiometric');
 
+  window.__osirisBio = { plugin: !!Bio, motivo: null, detalhe: null, tipo: null };
+
   // Telas que revelam dados do paciente e exigem autenticacao
   var PORTAS = {
     'emergency-loading': 1,
@@ -340,13 +353,25 @@
   var autorizado = false;
 
   function autenticar() {
+    var B = window.__osirisBio;
+    B.motivo = null; B.detalhe = null;
+
     if (!Bio) {
-      return Promise.resolve(PASSAR_SEM_BIOMETRIA ? 'sem-plugin' : false);
+      B.motivo = 'plugin-ausente';
+      return Promise.resolve(PASSAR_SEM_BIOMETRIA ? B.motivo : false);
     }
+
     return Bio.isAvailable({ useFallback: true }).then(function (r) {
+      B.tipo = r && r.biometryType;
+
       if (!r || !r.isAvailable) {
-        return PASSAR_SEM_BIOMETRIA ? 'indisponivel' : false;
+        B.motivo = 'indisponivel';
+        B.detalhe = 'errorCode=' + ((r && r.errorCode) || '?') +
+                    ' · aparelhoSeguro=' + ((r && r.deviceIsSecure) || false) +
+                    ' · tipo=' + ((r && r.biometryType) || '?');
+        return PASSAR_SEM_BIOMETRIA ? B.motivo : false;
       }
+
       return Bio.verifyIdentity({
         title: 'Protocolo de emergência',
         subtitle: 'Confirme sua identidade',
@@ -356,9 +381,15 @@
         fallbackTitle: 'Usar PIN do dispositivo',
         maxAttempts: 3
       }).then(function () { return true; })
-        .catch(function () { return false; });
-    }).catch(function () {
-      return PASSAR_SEM_BIOMETRIA ? 'erro-check' : false;
+        .catch(function (e) {
+          B.motivo = 'recusado';
+          B.detalhe = descreve(e);
+          return false;
+        });
+    }).catch(function (e) {
+      B.motivo = 'falha-na-checagem';
+      B.detalhe = descreve(e);
+      return PASSAR_SEM_BIOMETRIA ? B.motivo : false;
     });
   }
 
@@ -376,16 +407,19 @@
 
       var args = arguments;
       autenticar().then(function (ok) {
+        var B = window.__osirisBio;
         if (ok === true) {
           autorizado = true;
           goOriginal.apply(null, args);
         } else if (ok) {
-          // Aparelho sem biometria: segue, mas avisa
+          // Passou sem biometria: diz exatamente por que
           autorizado = true;
-          toast('Biometria indisponível neste aparelho — acesso liberado');
+          toast('Biometria não aplicada (' + B.motivo + ')' +
+                (B.detalhe ? ' · ' + B.detalhe : '') + ' — acesso liberado');
           goOriginal.apply(null, args);
         } else {
-          toast('Autenticação não confirmada. Acesso ao prontuário negado.');
+          toast('Acesso negado (' + (B.motivo || 'recusado') + ')' +
+                (B.detalhe ? ' · ' + B.detalhe : ''));
         }
       });
     };
