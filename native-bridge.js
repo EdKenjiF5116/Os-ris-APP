@@ -241,6 +241,7 @@
   var lastBack = 0;
 
   function toast(msg) {
+    if (!document.body) { console.log('[osiris]', msg); return; }
     var t = document.createElement('div');
     t.textContent = msg;
     t.style.cssText = 'position:fixed;left:50%;bottom:32px;transform:translateX(-50%);' +
@@ -320,4 +321,73 @@
             (D.erro ? ' · erro=' + D.erro : ''));
     });
   }, true);
+
+  /* ── 5. Digital antes da consulta de emergencia ─── */
+
+  // Se o aparelho nao tiver biometria cadastrada: true = deixa passar
+  // com aviso (seguro para demo), false = bloqueia.
+  var PASSAR_SEM_BIOMETRIA = true;
+
+  var Bio = plugin('NativeBiometric');
+
+  // Telas que revelam dados do paciente e exigem autenticacao
+  var PORTAS = {
+    'emergency-loading': 1,
+    'emergency-confirm': 1,
+    'emergency-data': 1
+  };
+
+  var autorizado = false;
+
+  function autenticar() {
+    if (!Bio) {
+      return Promise.resolve(PASSAR_SEM_BIOMETRIA ? 'sem-plugin' : false);
+    }
+    return Bio.isAvailable({ useFallback: true }).then(function (r) {
+      if (!r || !r.isAvailable) {
+        return PASSAR_SEM_BIOMETRIA ? 'indisponivel' : false;
+      }
+      return Bio.verifyIdentity({
+        title: 'Protocolo de emergência',
+        subtitle: 'Confirme sua identidade',
+        description: 'O acesso ao prontuário fica registrado na trilha de auditoria.',
+        negativeButtonText: 'Cancelar',
+        useFallback: true,          // permite PIN/padrao do aparelho
+        fallbackTitle: 'Usar PIN do dispositivo',
+        maxAttempts: 3
+      }).then(function () { return true; })
+        .catch(function () { return false; });
+    }).catch(function () {
+      return PASSAR_SEM_BIOMETRIA ? 'erro-check' : false;
+    });
+  }
+
+  if (typeof window.go === 'function') {
+    var goOriginal = window.go;
+
+    window.go = function (page) {
+      // Saiu do fluxo de emergencia: exige nova digital na proxima vez
+      if (!PORTAS[page]) {
+        autorizado = false;
+        return goOriginal.apply(null, arguments);
+      }
+
+      if (autorizado) return goOriginal.apply(null, arguments);
+
+      var args = arguments;
+      autenticar().then(function (ok) {
+        if (ok === true) {
+          autorizado = true;
+          goOriginal.apply(null, args);
+        } else if (ok) {
+          // Aparelho sem biometria: segue, mas avisa
+          autorizado = true;
+          toast('Biometria indisponível neste aparelho — acesso liberado');
+          goOriginal.apply(null, args);
+        } else {
+          toast('Autenticação não confirmada. Acesso ao prontuário negado.');
+        }
+      });
+    };
+  }
 })();
