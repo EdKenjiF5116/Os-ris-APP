@@ -35,13 +35,10 @@ jobs:
       - name: Criar projeto Capacitor
         run: |
           npm init -y
-          npm install \
-            @capacitor/core@8 \
-            @capacitor/cli@8 \
-            @capacitor/android@8 \
-            @capacitor/app@8 \
-            @capacitor/status-bar@8 \
-            @capgo/capacitor-nfc@8
+          npm install @capacitor/core@8 @capacitor/cli@8 @capacitor/android@8 @capacitor/app@8 @capacitor/status-bar@8 @capgo/capacitor-nfc@8 @capgo/capacitor-native-biometric@8
+
+          echo "--- dependencias instaladas ---"
+          node -e "console.log(Object.keys(require('./package.json').dependencies).join('\n'))"
 
           cat > capacitor.config.json <<'FIM'
           {
@@ -133,6 +130,34 @@ jobs:
 
       - name: Sincronizar
         run: npx cap sync android
+
+      - name: Conferir se os plugins entraram no APK
+        run: |
+          ARQ=android/app/src/main/assets/capacitor.plugins.json
+          echo "--- plugins registrados no APK ---"
+          cat "$ARQ"
+          echo "----------------------------------"
+
+          # Essenciais: sem eles o app nao cumpre a funcao. Derruba o build.
+          FALTOU=0
+          grep -q "capacitor-nfc" "$ARQ" || { echo "ERRO — FALTA: @capgo/capacitor-nfc"; FALTOU=1; }
+          grep -q "capacitor/app"  "$ARQ" || { echo "ERRO — FALTA: @capacitor/app"; FALTOU=1; }
+          if [ "$FALTOU" = "1" ]; then
+            echo "Plugin essencial ausente. Interrompendo."
+            exit 1
+          fi
+
+          # Opcional: avisa alto, mas NAO impede a geracao do APK.
+          if grep -q "native-biometric" "$ARQ"; then
+            echo "OK — biometria presente."
+          else
+            echo ""
+            echo "=================================================="
+            echo "  AVISO: @capgo/capacitor-native-biometric AUSENTE"
+            echo "  O APK sera gerado e funcionara, mas a digital"
+            echo "  nao sera pedida no protocolo de emergencia."
+            echo "=================================================="
+          fi
 
       - name: Compilar o APK
         run: |
