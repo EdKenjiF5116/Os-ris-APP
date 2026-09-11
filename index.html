@@ -868,10 +868,10 @@ function svgBarChart(elId, opts){
 const LOGO_IMG = 'data:image/png;base64,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';
 
 // ══ PATIENT MEDICAL DATABASE (by emergency code) ══
-const PATIENTS_MED = {"AB12CD34": {"name": "João da Silva", "age": 45, "bloodType": "A+", "cpf": "123.456.789-00", "vitals": {"bp": "138/88 mmHg", "hr": "78 bpm", "glucose": "124 mg/dL", "o2": "96%", "date": "03/03/2026 08:30"}, "allergies": [{"name": "Penicilina", "severity": "GRAVE", "reaction": "Anafilaxia"}, {"name": "Dipirona", "severity": "MODERADA", "reaction": "Urticária"}, {"name": "Látex", "severity": "LEVE", "reaction": "Dermatite de contato"}], "conditions": [{"name": "Hipertensão Arterial", "year": 2020, "status": "Em tratamento"}, {"name": "Diabetes Mellitus Tipo 2", "year": 2018, "status": "Em tratamento"}, {"name": "Insuficiência Cardíaca Leve", "year": 2022, "status": "Monitoramento"}], "medications": [{"name": "Losartana 50mg", "freq": "1x ao dia", "type": "Anti-hipertensivo"}, {"name": "Metformina 850mg", "freq": "2x ao dia", "type": "Antidiabético"}, {"name": "Carvedilol 6,25mg", "freq": "2x ao dia", "type": "Cardiopatia"}, {"name": "AAS 100mg", "freq": "1x ao dia", "type": "Anticoagulante"}], "contacts": [{"name": "Maria da Silva (Esposa)", "phone": "(11) 98765-4321"}, {"name": "Pedro Silva (Filho)", "phone": "(11) 97654-3210"}]}, "EF56GH78": {"name": "Maria Santos", "age": 52, "bloodType": "O+", "cpf": "234.567.890-11", "vitals": {"bp": "145/92 mmHg", "hr": "88 bpm", "glucose": "142 mg/dL", "o2": "98%", "date": "03/03/2026 09:15"}, "allergies": [{"name": "Sulfa", "severity": "MODERADA", "reaction": "Erupção cutânea"}], "conditions": [{"name": "Diabetes Mellitus Tipo 2", "year": 2015, "status": "Em tratamento"}, {"name": "Obesidade Grau I", "year": 2018, "status": "Em tratamento"}], "medications": [{"name": "Metformina 850mg", "freq": "2x ao dia", "type": "Antidiabético"}, {"name": "Glibenclamida 5mg", "freq": "1x ao dia", "type": "Antidiabético"}], "contacts": [{"name": "Carlos Santos (Esposo)", "phone": "(11) 91234-5678"}]}, "IJ90KL12": {"name": "Pedro Alves", "age": 45, "bloodType": "B-", "cpf": "567.890.123-44", "vitals": {"bp": "160/95 mmHg", "hr": "112 bpm", "glucose": "189 mg/dL", "o2": "93%", "date": "03/03/2026 02:15"}, "allergies": [{"name": "Penicilina", "severity": "GRAVE", "reaction": "Anafilaxia"}, {"name": "AAS", "severity": "MODERADA", "reaction": "Broncoespasmo"}], "conditions": [{"name": "Hipertensão Arterial", "year": 2016, "status": "Em tratamento"}, {"name": "Síndrome Coronariana Aguda", "year": 2026, "status": "Monitoramento"}], "medications": [{"name": "Losartana 50mg", "freq": "1x ao dia", "type": "Anti-hipertensivo"}, {"name": "Clopidogrel 75mg", "freq": "1x ao dia", "type": "Antiagregante"}], "contacts": [{"name": "Ana Alves (Esposa)", "phone": "(11) 99876-5432"}, {"name": "Lucas Alves (Filho)", "phone": "(11) 98765-4321"}]}, "MN34OP56": {"name": "Ana Lima", "age": 38, "bloodType": "A-", "cpf": "456.789.012-33", "vitals": {"bp": "118/76 mmHg", "hr": "72 bpm", "glucose": "95 mg/dL", "o2": "99%", "date": "15/01/2026 10:30"}, "allergies": [{"name": "Ibuprofeno", "severity": "LEVE", "reaction": "Gastrite"}], "conditions": [{"name": "Hipotireoidismo", "year": 2019, "status": "Em tratamento"}, {"name": "Síndrome do Ovário Policístico", "year": 2017, "status": "Monitoramento"}], "medications": [{"name": "Levotiroxina 50mcg", "freq": "1x ao dia", "type": "Hormônio tireoidiano"}, {"name": "Metformina 500mg", "freq": "1x ao dia", "type": "Antidiabético"}], "contacts": [{"name": "Roberto Lima (Esposo)", "phone": "(11) 97654-3210"}]}, "QR78ST90": {"name": "Carlos Eduardo", "age": 34, "bloodType": "O-", "cpf": "765.432.198-22", "vitals": {"bp": "122/80 mmHg", "hr": "90 bpm", "glucose": "110 mg/dL", "o2": "97%", "date": "01/03/2026 14:20"}, "allergies": [], "conditions": [{"name": "Fratura Exposta de Tíbia", "year": 2026, "status": "Em tratamento"}], "medications": [{"name": "Tramadol 50mg", "freq": "6/6h se dor", "type": "Analgésico"}, {"name": "Cefalexina 500mg", "freq": "4x ao dia", "type": "Antibiótico"}], "contacts": [{"name": "Fernanda Eduardo (Esposa)", "phone": "(11) 96543-2109"}]}};
+const PATIENTS_MED = {"AB12CD34": {"name": "João da Silva", "age": 45, "bloodType": "A+", "cpf": "234.567.890-11", "vitals": {"bp": "138/88 mmHg", "hr": "78 bpm", "glucose": "124 mg/dL", "o2": "96%", "date": "03/03/2026 08:30"}, "allergies": [{"name": "Penicilina", "severity": "GRAVE", "reaction": "Anafilaxia"}, {"name": "Dipirona", "severity": "MODERADA", "reaction": "Urticária"}, {"name": "Látex", "severity": "LEVE", "reaction": "Dermatite de contato"}], "conditions": [{"name": "Hipertensão Arterial", "year": 2020, "status": "Em tratamento"}, {"name": "Diabetes Mellitus Tipo 2", "year": 2018, "status": "Em tratamento"}, {"name": "Insuficiência Cardíaca Leve", "year": 2022, "status": "Monitoramento"}], "medications": [{"name": "Losartana 50mg", "freq": "1x ao dia", "type": "Anti-hipertensivo"}, {"name": "Metformina 850mg", "freq": "2x ao dia", "type": "Antidiabético"}, {"name": "Carvedilol 6,25mg", "freq": "2x ao dia", "type": "Cardiopatia"}, {"name": "AAS 100mg", "freq": "1x ao dia", "type": "Anticoagulante"}], "contacts": [{"name": "Maria da Silva (Esposa)", "phone": "(11) 98765-4321"}, {"name": "Pedro Silva (Filho)", "phone": "(11) 97654-3210"}]}, "EF56GH78": {"name": "Maria Santos", "age": 52, "bloodType": "O+", "cpf": "123.456.789-00", "vitals": {"bp": "145/92 mmHg", "hr": "88 bpm", "glucose": "142 mg/dL", "o2": "98%", "date": "03/03/2026 09:15"}, "allergies": [{"name": "Sulfa", "severity": "MODERADA", "reaction": "Erupção cutânea"}], "conditions": [{"name": "Diabetes Mellitus Tipo 2", "year": 2015, "status": "Em tratamento"}, {"name": "Obesidade Grau I", "year": 2018, "status": "Em tratamento"}], "medications": [{"name": "Metformina 850mg", "freq": "2x ao dia", "type": "Antidiabético"}, {"name": "Glibenclamida 5mg", "freq": "1x ao dia", "type": "Antidiabético"}], "contacts": [{"name": "Carlos Santos (Esposo)", "phone": "(11) 91234-5678"}]}, "IJ90KL12": {"name": "Pedro Alves", "age": 45, "bloodType": "B-", "cpf": "567.890.123-44", "vitals": {"bp": "160/95 mmHg", "hr": "112 bpm", "glucose": "189 mg/dL", "o2": "93%", "date": "03/03/2026 02:15"}, "allergies": [{"name": "Penicilina", "severity": "GRAVE", "reaction": "Anafilaxia"}, {"name": "AAS", "severity": "MODERADA", "reaction": "Broncoespasmo"}], "conditions": [{"name": "Hipertensão Arterial", "year": 2016, "status": "Em tratamento"}, {"name": "Síndrome Coronariana Aguda", "year": 2026, "status": "Monitoramento"}], "medications": [{"name": "Losartana 50mg", "freq": "1x ao dia", "type": "Anti-hipertensivo"}, {"name": "Clopidogrel 75mg", "freq": "1x ao dia", "type": "Antiagregante"}], "contacts": [{"name": "Ana Alves (Esposa)", "phone": "(11) 99876-5432"}, {"name": "Lucas Alves (Filho)", "phone": "(11) 98765-4321"}]}, "MN34OP56": {"name": "Ana Lima", "age": 38, "bloodType": "A-", "cpf": "456.789.012-33", "vitals": {"bp": "118/76 mmHg", "hr": "72 bpm", "glucose": "95 mg/dL", "o2": "99%", "date": "15/01/2026 10:30"}, "allergies": [{"name": "Ibuprofeno", "severity": "LEVE", "reaction": "Gastrite"}], "conditions": [{"name": "Hipotireoidismo", "year": 2019, "status": "Em tratamento"}, {"name": "Síndrome do Ovário Policístico", "year": 2017, "status": "Monitoramento"}], "medications": [{"name": "Levotiroxina 50mcg", "freq": "1x ao dia", "type": "Hormônio tireoidiano"}, {"name": "Metformina 500mg", "freq": "1x ao dia", "type": "Antidiabético"}], "contacts": [{"name": "Roberto Lima (Esposo)", "phone": "(11) 97654-3210"}]}, "QR78ST90": {"name": "Carlos Eduardo", "age": 34, "bloodType": "O-", "cpf": "765.432.198-22", "vitals": {"bp": "122/80 mmHg", "hr": "90 bpm", "glucose": "110 mg/dL", "o2": "97%", "date": "01/03/2026 14:20"}, "allergies": [], "conditions": [{"name": "Fratura Exposta de Tíbia", "year": 2026, "status": "Em tratamento"}], "medications": [{"name": "Tramadol 50mg", "freq": "6/6h se dor", "type": "Analgésico"}, {"name": "Cefalexina 500mg", "freq": "4x ao dia", "type": "Antibiótico"}], "contacts": [{"name": "Fernanda Eduardo (Esposa)", "phone": "(11) 96543-2109"}]}};
 
 // ══ DEFAULT ACCOUNTS ══
-const DEFAULT_PATIENTS = {"123.456.789-00": {"name": "Maria Santos", "cpf": "123.456.789-00", "password": "123456", "code": "EF56GH78", "type": "patient"}, "234.567.890-11": {"name": "João da Silva", "cpf": "234.567.890-11", "password": "123456", "code": "AB12CD34", "type": "patient"}, "456.789.012-33": {"name": "Ana Lima", "cpf": "456.789.012-33", "password": "123456", "code": "MN34OP56", "type": "patient"}, "567.890.123-44": {"name": "Pedro Alves", "cpf": "567.890.123-44", "password": "123456", "code": "IJ90KL12", "type": "patient"}};
+const DEFAULT_PATIENTS = {"123.456.789-00": {"name": "Maria Santos", "cpf": "123.456.789-00", "password": "123456", "code": "EF56GH78", "type": "patient"}, "234.567.890-11": {"name": "João da Silva", "cpf": "234.567.890-11", "password": "123456", "code": "AB12CD34", "type": "patient"}, "456.789.012-33": {"name": "Ana Lima", "cpf": "456.789.012-33", "password": "123456", "code": "MN34OP56", "type": "patient"}, "567.890.123-44": {"name": "Pedro Alves", "cpf": "567.890.123-44", "password": "123456", "code": "IJ90KL12", "type": "patient"}, "765.432.198-22": {"name": "Carlos Eduardo", "cpf": "765.432.198-22", "password": "123456", "code": "QR78ST90", "type": "patient"}};
 const DEFAULT_DOCTORS = {"123456/SP": {"name": "Dr. Carlos Mendes", "crm": "123456/SP", "password": "123456", "type": "doctor"}, "234567/SP": {"name": "Dra. Ana Souza", "crm": "234567/SP", "password": "123456", "type": "doctor"}, "345678/SP": {"name": "Dr. Ricardo Lima", "crm": "345678/SP", "password": "123456", "type": "doctor"}};
 
 // ══ SAFE STORAGE (localStorage com fallback em memória) ══
@@ -2432,6 +2432,653 @@ if(document.readyState==='loading'){
 }else{
   startApp();
 }
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   OSÍRIS — Funcionalidades adicionais
+   1. Prontuário persistente (paciente novo passa a existir de verdade)
+   2. Upload de laudo em PDF que atualiza prontuário e bloco de emergência
+   3. Registro de acessos de emergência na tela do paciente
+   Nenhuma função existente foi reescrita — tudo é acréscimo.
+   ══════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var KEY_MED = 'peb_med';
+  var KEY_LOG = 'peb_emg_log';
+
+  /* ─────────── 1. Prontuário persistente ─────────── */
+
+  function getMed() {
+    try { return JSON.parse(Store.get(KEY_MED) || 'null'); } catch (e) { return null; }
+  }
+  function setMed(db) { Store.set(KEY_MED, JSON.stringify(db)); }
+
+  function initMed() {
+    if (!getMed()) setMed(JSON.parse(JSON.stringify(PATIENTS_MED)));
+  }
+
+  function prontuarioVazio(conta) {
+    return {
+      name: conta.name || 'Paciente',
+      age: conta.age || null,
+      bloodType: conta.bloodType || '—',
+      cpf: conta.cpf || '',
+      vitals: { bp: '—', hr: '—', glucose: '—', o2: '—', date: 'sem registro' },
+      allergies: [], conditions: [], medications: [], contacts: [],
+      novo: true
+    };
+  }
+
+  initMed();
+
+  // Sincroniza os prontuarios ja salvos com a base de contas.
+  // Versoes anteriores gravaram o CPF de Joao e Maria trocados; sem isto,
+  // corrigir a constante nao conserta quem ja tem dados no aparelho.
+  function repararProntuarios() {
+    try {
+      var db = getMed() || {}, pts = getPatients(), mudou = false;
+      for (var cpf in pts) {
+        var a = pts[cpf];
+        var rec = a.code ? db[a.code] : null;
+        if (!rec) continue;
+        if (rec.cpf !== cpf) { rec.cpf = cpf; mudou = true; }
+        if (a.name && rec.name !== a.name) { rec.name = a.name; mudou = true; }
+      }
+      if (mudou) { setMed(db); console.log('[osiris] prontuarios sincronizados com as contas'); }
+    } catch (e) { console.error('[osiris]', e); }
+  }
+  repararProntuarios();
+
+  // Paciente novo ganha prontuário no momento do cadastro
+  var savePatientOrig = window.savePatient;
+  window.savePatient = function (cpf, data) {
+    savePatientOrig(cpf, data);
+    try {
+      if (data && data.code) {
+        var db = getMed() || {};
+        if (!db[data.code]) { db[data.code] = prontuarioVazio(data); setMed(db); }
+      }
+    } catch (e) { console.error('[osiris]', e); }
+  };
+
+  // Busca passa a considerar os prontuários salvos, não só a constante
+  window.lookupByCode = function (code) {
+    code = (code || '').trim().toUpperCase();
+    var db = getMed() || {};
+    if (db[code]) return Object.assign({}, db[code], { code: code });
+    var pts = getPatients();
+    for (var cpf in pts) {
+      if (pts[cpf].code === code) {
+        var novo = prontuarioVazio(pts[cpf]);
+        db[code] = novo; setMed(db);
+        return Object.assign({}, novo, { code: code });
+      }
+    }
+    return null;
+  };
+
+  function codigoDoUsuario() {
+    return (S.user && S.user.code) ? S.user.code : null;
+  }
+
+  /* ─────────── 2. Upload de laudo em PDF ─────────── */
+
+  // ── 2a. Extração de texto sem biblioteca externa ──
+
+  function latin1(bytes) {
+    var s = '', CH = 8192;
+    for (var i = 0; i < bytes.length; i += CH) {
+      s += String.fromCharCode.apply(null, bytes.subarray(i, i + CH));
+    }
+    return s;
+  }
+
+  function ascii85(bytes) {
+    var out = [], tupla = 0, n = 0;
+    for (var i = 0; i < bytes.length; i++) {
+      var c = bytes[i];
+      if (c === 0x7E) break;
+      if (c <= 0x20) continue;
+      if (c === 0x7A && n === 0) { out.push(0, 0, 0, 0); continue; }
+      if (c < 0x21 || c > 0x75) continue;
+      tupla = tupla * 85 + (c - 0x21);
+      if (++n === 5) {
+        out.push((tupla >>> 24) & 255, (tupla >>> 16) & 255, (tupla >>> 8) & 255, tupla & 255);
+        tupla = 0; n = 0;
+      }
+    }
+    if (n > 0) {
+      for (var j = n; j < 5; j++) tupla = tupla * 85 + 84;
+      var b = [(tupla >>> 24) & 255, (tupla >>> 16) & 255, (tupla >>> 8) & 255, tupla & 255];
+      for (var k = 0; k < n - 1; k++) out.push(b[k]);
+    }
+    return new Uint8Array(out);
+  }
+
+  function inflar(bytes) {
+    function tentar(fmt) {
+      var ds = new DecompressionStream(fmt);
+      var st = new Blob([bytes]).stream().pipeThrough(ds);
+      return new Response(st).arrayBuffer().then(function (ab) { return new Uint8Array(ab); });
+    }
+    return tentar('deflate').catch(function () {
+      return tentar('deflate-raw').catch(function () { return null; });
+    });
+  }
+
+  function decodeLiteral(s) {
+    var out = '', i = 0;
+    while (i < s.length) {
+      var c = s[i];
+      if (c === '\\') {
+        var n = s[i + 1];
+        if (n === 'n') { out += '\n'; i += 2; }
+        else if (n === 'r') { out += '\r'; i += 2; }
+        else if (n === 't') { out += '\t'; i += 2; }
+        else if (n >= '0' && n <= '7') {
+          var oct = '', j = i + 1;
+          while (j < s.length && oct.length < 3 && s[j] >= '0' && s[j] <= '7') { oct += s[j]; j++; }
+          out += String.fromCharCode(parseInt(oct, 8)); i = j;
+        } else { out += n; i += 2; }
+      } else { out += c; i++; }
+    }
+    return out;
+  }
+
+  function decodeHex(s) {
+    var h = s.replace(/[^0-9A-Fa-f]/g, ''), out = '';
+    for (var i = 0; i + 1 < h.length; i += 2) out += String.fromCharCode(parseInt(h.substr(i, 2), 16));
+    return out;
+  }
+
+  function textoDoStream(cs) {
+    var linhas = [], atual = '';
+    var re = /(\[[^\]]*\]|\((?:\\.|[^\\)])*\)|<[0-9A-Fa-f\s]*>)\s*(TJ|Tj|'|")|\bTd\b|\bTD\b|\bT\*\b|\bET\b/g;
+    var m;
+    while ((m = re.exec(cs)) !== null) {
+      if (!m[1]) { if (atual.trim()) { linhas.push(atual.trim()); atual = ''; } continue; }
+      var arg = m[1], txt = '';
+      if (arg[0] === '[') {
+        var partes = arg.match(/\((?:\\.|[^\\)])*\)|<[0-9A-Fa-f\s]*>|-?\d+(?:\.\d+)?/g) || [];
+        for (var i = 0; i < partes.length; i++) {
+          var p = partes[i];
+          if (p[0] === '(') txt += decodeLiteral(p.slice(1, -1));
+          else if (p[0] === '<') txt += decodeHex(p.slice(1, -1));
+          else if (parseFloat(p) < -120) txt += ' ';
+        }
+      } else if (arg[0] === '(') txt = decodeLiteral(arg.slice(1, -1));
+      else txt = decodeHex(arg.slice(1, -1));
+      atual += txt;
+    }
+    if (atual.trim()) linhas.push(atual.trim());
+    return linhas.join('\n');
+  }
+
+  function extrairTextoPDF(arrayBuffer) {
+    var bytes = new Uint8Array(arrayBuffer);
+    var raw = latin1(bytes);
+    var blocos = [], re = /stream\r?\n?/g, m, tarefas = [];
+
+    while ((m = re.exec(raw)) !== null) {
+      var ini = m.index + m[0].length;
+      var fim = raw.indexOf('endstream', ini);
+      if (fim < 0) continue;
+      var cab = raw.slice(Math.max(0, m.index - 400), m.index);
+      if (/DCTDecode|JPXDecode|CCITTFaxDecode/.test(cab)) { re.lastIndex = fim; continue; }
+      tarefas.push({ dados: bytes.subarray(ini, fim), cab: cab });
+      re.lastIndex = fim;
+    }
+
+    return tarefas.reduce(function (cadeia, t) {
+      return cadeia.then(function () {
+        var filtros = (t.cab.match(/\/(ASCII85Decode|ASCIIHexDecode|FlateDecode|LZWDecode)/g) || [])
+          .map(function (f) { return f.slice(1); });
+        var passo = Promise.resolve(t.dados);
+        filtros.forEach(function (f) {
+          passo = passo.then(function (d) {
+            if (!d) return null;
+            if (f === 'ASCII85Decode') return ascii85(d);
+            if (f === 'ASCIIHexDecode') {
+              var h = latin1(d).replace(/[^0-9A-Fa-f]/g, '');
+              var arr = new Uint8Array(h.length >> 1);
+              for (var k = 0; k < arr.length; k++) arr[k] = parseInt(h.substr(k * 2, 2), 16);
+              return arr;
+            }
+            if (f === 'FlateDecode') return inflar(d);
+            return null;
+          });
+        });
+        return passo.then(function (d) {
+          if (!d) return;
+          var cs = latin1(d);
+          if (!/\bTj\b|\bTJ\b/.test(cs)) return;
+          var txt = textoDoStream(cs);
+          if (txt) blocos.push(txt);
+        }).catch(function () {});
+      });
+    }, Promise.resolve()).then(function () {
+      return blocos.join('\n').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+    });
+  }
+
+  // ── 2b. Interpretação do laudo ──
+
+  var CABECALHOS = [
+    ['alergias', /^(alergias?|hipersensibilidade)\b/i],
+    ['condicoes', /^(diagn[oó]sticos?|comorbidades?|hip[oó]teses? diagn[oó]sticas?)\b/i],
+    ['medicacoes', /^(prescri[cç][aã]o|medica[cç][oõ]es|medicamentos?|uso cont[ií]nuo|em uso)\b/i],
+    ['ignorar', /^(anamnese|exame f[ií]sico|conduta|observa[cç][oõ]es|retorno|m[eé]dico respons[aá]vel|paciente|cpf|data|idade|tipo sangu)/i]
+  ];
+
+  function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+  function tc(s) { s = norm(s).toLowerCase(); return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function fatiar(texto) {
+    var sec = { alergias: '', condicoes: '', medicacoes: '' }, atual = null;
+    texto.split(/\n+/).forEach(function (bruta) {
+      var linha = norm(bruta);
+      if (!linha) return;
+      for (var i = 0; i < CABECALHOS.length; i++) {
+        var m = CABECALHOS[i][1].exec(linha);
+        if (m) {
+          atual = (CABECALHOS[i][0] === 'ignorar') ? null : CABECALHOS[i][0];
+          if (atual) {
+            var resto = linha.slice(m[0].length).replace(/^\s*[:\-–]\s*/, '');
+            if (resto) sec[atual] += resto + '\n';
+          }
+          return;
+        }
+      }
+      if (atual) sec[atual] += linha + '\n';
+    });
+    for (var k in sec) sec[k] = sec[k].replace(/[ \t]+/g, ' ').trim();
+    return sec;
+  }
+
+  function itens(bloco, sep) {
+    var out = [];
+    bloco.split(/\n+/).forEach(function (linha) {
+      linha.split(sep).forEach(function (p) { var t = norm(p); if (t) out.push(t); });
+    });
+    return out;
+  }
+
+  function gravidade(t) {
+    t = t.toLowerCase();
+    if (/anafila|grave|choque|severa/.test(t)) return 'GRAVE';
+    if (/moderad|urtic[aá]ria|broncoespasmo|edema|rash/.test(t)) return 'MODERADA';
+    return 'LEVE';
+  }
+
+  function analisarLaudo(texto) {
+    var sec = fatiar(texto);
+
+    var alergias = [];
+    if (sec.alergias && !/\b(nega|nenhuma|sem alergias?|n[aã]o refere)\b/i.test(sec.alergias)) {
+      alergias = itens(sec.alergias, /[.;]\s+|,\s*(?=[A-ZÁÉÍÓÚÂÊÔÃÕ])/)
+        .filter(function (p) { return p.length > 2 && p.length < 90; })
+        .map(function (p) {
+          var par = p.match(/\(([^)]*)\)/);
+          var tr = p.match(/^([^\-–—]{2,40})\s*[\-–—]\s*(.+)$/);
+          var reacao = par ? norm(par[1]) : (tr ? norm(tr[2]) : '');
+          var bruto = tr ? tr[1] : p.replace(/\([^)]*\)/g, '');
+          var nome = tc(bruto.replace(/[.:;]+$/, ''));
+          if (!nome || /^\d+$/.test(nome)) return null;
+          return { name: nome, severity: gravidade(p), reaction: reacao ? tc(reacao.split(',')[0]) : 'Não especificada' };
+        }).filter(Boolean).slice(0, 8);
+    }
+
+    var ano = new Date().getFullYear();
+    var condicoes = itens(sec.condicoes, /\s*\d+\s*[.)]\s*|[.;]\s+/)
+      .map(function (p) { return norm(p).replace(/^[\d.\s)]+/, '').replace(/[.:;]+$/, ''); })
+      .filter(function (p) { return p.length > 3 && p.length < 70 && /[a-zà-ú]/i.test(p); })
+      .map(function (p) { return { name: tc(p), year: ano, status: 'Em tratamento' }; })
+      .slice(0, 10);
+
+    var bloco = sec.medicacoes || texto;
+    var reMed = /([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-zà-úA-ZÀ-Ú]{2,}(?:\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ]{2,})?)\s+(\d+(?:[,.]\d+)?)\s*(mg|mcg|g|ml|UI)\b/g;
+    var meds = [], vistos = {}, mm;
+    while ((mm = reMed.exec(bloco)) !== null) {
+      var nome = norm(mm[1]), chave = nome.toLowerCase();
+      if (vistos[chave]) continue;
+      vistos[chave] = 1;
+      var dep = bloco.slice(mm.index + mm[0].length, mm.index + mm[0].length + 40);
+      var f = dep.match(/(\d+\s*x\s*ao dia|\d+\s*x\/dia|\d+\/\d+\s*h|ao dia|[àa]\s*noite|de manh[ãa]|se dor)/i);
+      meds.push({ name: nome + ' ' + mm[2] + mm[3], freq: f ? tc(f[1]) : 'Conforme prescrição', type: 'Do laudo' });
+      if (meds.length >= 12) break;
+    }
+
+    var mS = texto.match(/tipo\s*sangu[ií]?n?e?o?\s*:?\s*(AB|A|B|O)\s*([+\-]|positivo|negativo)/i);
+    var sangue = mS ? mS[1].toUpperCase() + (/neg/i.test(mS[2]) ? '-' : (/pos/i.test(mS[2]) ? '+' : mS[2])) : null;
+
+    var mC = texto.match(/CRM\s*:?\s*-?\s*([A-Z]{2})?\s*(\d{4,7})\s*\/?\s*([A-Z]{2})?/i);
+    var crm = mC ? mC[2] + ((mC[3] || mC[1]) ? '/' + (mC[3] || mC[1]).toUpperCase() : '') : null;
+
+    return { bloodType: sangue, allergies: alergias, conditions: condicoes, medications: meds, crm: crm };
+  }
+
+  // ── 2c. Interface ──
+
+  var achadosPendentes = null;
+
+  function overlay(html) {
+    fechar();
+    var d = document.createElement('div');
+    d.id = 'osiris-modal';
+    d.style.cssText = 'position:fixed;inset:0;background:rgba(2,6,23,.75);z-index:9999;' +
+      'display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto';
+    d.innerHTML = '<div style="background:#fff;border-radius:16px;max-width:520px;width:100%;' +
+      'max-height:88vh;overflow-y:auto;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.4)">' + html + '</div>';
+    document.body.appendChild(d);
+    d.addEventListener('click', function (e) { if (e.target === d) fechar(); });
+  }
+  function fechar() { var m = document.getElementById('osiris-modal'); if (m) m.remove(); }
+  window.osirisFecharModal = fechar;
+
+  function aviso(msg, cor) {
+    var t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:99999;' +
+      'background:' + (cor || '#0f6e56') + ';color:#fff;padding:12px 20px;border-radius:14px;' +
+      'font-size:13px;max-width:88vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.35)';
+    document.body.appendChild(t);
+    setTimeout(function () { t.remove(); }, 3800);
+  }
+
+  function iniciarUpload() {
+    var inp = document.getElementById('osiris-file');
+    if (!inp) {
+      inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'application/pdf,.pdf';
+      inp.id = 'osiris-file';
+      inp.style.display = 'none';
+      inp.addEventListener('change', function () {
+        var f = inp.files && inp.files[0];
+        inp.value = '';
+        if (f) processar(f);
+      });
+      document.body.appendChild(inp);
+    }
+    inp.click();
+  }
+  window.osirisUpload = iniciarUpload;
+
+  function processar(file) {
+    overlay('<div style="text-align:center;padding:24px 8px">' +
+      '<div style="font-size:15px;font-weight:700;margin-bottom:6px">Lendo o documento</div>' +
+      '<div style="font-size:13px;color:#64748b">' + file.name + '</div></div>');
+
+    file.arrayBuffer().then(extrairTextoPDF).then(function (texto) {
+      if (!texto || texto.length < 40) {
+        overlay(cabecalhoModal('Não consegui ler este PDF') +
+          '<p style="font-size:13px;color:#475569;line-height:1.6">' +
+          'O arquivo não tem texto selecionável — provavelmente é um documento escaneado, ' +
+          'que precisaria de reconhecimento de imagem. Tente um PDF gerado digitalmente.</p>' +
+          botaoFechar());
+        return;
+      }
+      var achados = analisarLaudo(texto);
+      var total = achados.allergies.length + achados.conditions.length + achados.medications.length;
+      if (!total && !achados.bloodType) {
+        overlay(cabecalhoModal('Nada reconhecido') +
+          '<p style="font-size:13px;color:#475569;line-height:1.6">O texto foi lido, mas não encontrei ' +
+          'seções de alergias, diagnósticos ou prescrição neste documento.</p>' + botaoFechar());
+        return;
+      }
+      achadosPendentes = { achados: achados, arquivo: file.name };
+      overlay(telaConfirmacao(achados, file.name));
+    }).catch(function (e) {
+      overlay(cabecalhoModal('Erro ao processar') +
+        '<p style="font-size:13px;color:#475569">' + (e && e.message ? e.message : e) + '</p>' + botaoFechar());
+    });
+  }
+
+  function cabecalhoModal(t) {
+    return '<div style="font-size:17px;font-weight:800;margin-bottom:12px;color:#0f172a">' + t + '</div>';
+  }
+  function botaoFechar() {
+    return '<button onclick="osirisFecharModal()" style="margin-top:16px;width:100%;padding:13px;' +
+      'border:0;border-radius:12px;background:#0f6e56;color:#fff;font-size:14px;font-weight:700">Fechar</button>';
+  }
+
+  function linhaItem(id, titulo, sub, cor) {
+    return '<label style="display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid #e2e8f0;' +
+      'border-radius:10px;margin-bottom:7px;cursor:pointer">' +
+      '<input type="checkbox" class="osiris-chk" data-id="' + id + '" checked style="margin-top:3px;width:17px;height:17px">' +
+      '<span style="flex:1"><span style="font-size:13.5px;font-weight:700;color:#0f172a">' + titulo + '</span>' +
+      (sub ? '<br><span style="font-size:12px;color:' + (cor || '#64748b') + '">' + sub + '</span>' : '') +
+      '</span></label>';
+  }
+
+  function telaConfirmacao(a, arquivo) {
+    var h = cabecalhoModal('Confira antes de salvar');
+    h += '<p style="font-size:12.5px;color:#64748b;margin-bottom:14px;line-height:1.5">' +
+      'Extraído de <b>' + arquivo + '</b>. Desmarque o que estiver errado. ' +
+      'Tudo entra como <b>informado por documento</b> até um médico validar.</p>';
+
+    if (a.bloodType) h += '<div style="font-size:12px;font-weight:800;text-transform:uppercase;color:#475569;margin:10px 0 6px">Tipo sanguíneo</div>' +
+      linhaItem('blood', a.bloodType, null);
+
+    if (a.allergies.length) {
+      h += '<div style="font-size:12px;font-weight:800;text-transform:uppercase;color:#475569;margin:14px 0 6px">Alergias</div>';
+      a.allergies.forEach(function (x, i) {
+        var c = x.severity === 'GRAVE' ? '#dc2626' : (x.severity === 'MODERADA' ? '#ea580c' : '#65a30d');
+        h += linhaItem('a' + i, x.name, x.severity + ' · ' + x.reaction, c);
+      });
+    }
+    if (a.conditions.length) {
+      h += '<div style="font-size:12px;font-weight:800;text-transform:uppercase;color:#475569;margin:14px 0 6px">Condições</div>';
+      a.conditions.forEach(function (x, i) { h += linhaItem('c' + i, x.name, x.status); });
+    }
+    if (a.medications.length) {
+      h += '<div style="font-size:12px;font-weight:800;text-transform:uppercase;color:#475569;margin:14px 0 6px">Medicações</div>';
+      a.medications.forEach(function (x, i) { h += linhaItem('m' + i, x.name, x.freq); });
+    }
+
+    h += '<div style="display:flex;gap:8px;margin-top:18px">' +
+      '<button onclick="osirisFecharModal()" style="flex:1;padding:13px;border:1px solid #cbd5e1;' +
+      'border-radius:12px;background:#fff;color:#475569;font-size:14px;font-weight:700">Cancelar</button>' +
+      '<button onclick="osirisConfirmar()" style="flex:2;padding:13px;border:0;border-radius:12px;' +
+      'background:#0f6e56;color:#fff;font-size:14px;font-weight:700">Salvar no prontuário</button></div>';
+    return h;
+  }
+
+  window.osirisConfirmar = function () {
+    if (!achadosPendentes) return fechar();
+    var marcados = {};
+    document.querySelectorAll('.osiris-chk').forEach(function (c) {
+      if (c.checked) marcados[c.getAttribute('data-id')] = 1;
+    });
+
+    var code = codigoDoUsuario();
+    if (!code) { fechar(); aviso('Não identifiquei o código do paciente.', '#b91c1c'); return; }
+
+    var db = getMed() || {};
+    var rec = db[code] || (db[code] = prontuarioVazio(S.user || {}));
+    var a = achadosPendentes.achados, arq = achadosPendentes.arquivo, n = 0;
+
+    function existe(lista, nome) {
+      return lista.some(function (x) { return (x.name || '').toLowerCase() === nome.toLowerCase(); });
+    }
+    function juntar(destino, origem, prefixo) {
+      origem.forEach(function (x, i) {
+        if (!marcados[prefixo + i]) return;
+        if (existe(destino, x.name)) return;
+        x.origem = 'documento'; x.doc = arq;
+        destino.push(x); n++;
+      });
+    }
+
+    if (a.bloodType && marcados.blood) { rec.bloodType = a.bloodType; n++; }
+    rec.allergies = rec.allergies || []; juntar(rec.allergies, a.allergies, 'a');
+    rec.conditions = rec.conditions || []; juntar(rec.conditions, a.conditions, 'c');
+    rec.medications = rec.medications || []; juntar(rec.medications, a.medications, 'm');
+
+    rec.docs = rec.docs || [];
+    rec.docs.unshift({ nome: arq, quando: new Date().toISOString(), itens: n });
+    rec.novo = false;
+    setMed(db);
+    achadosPendentes = null;
+    fechar();
+    aviso(n + (n === 1 ? ' item adicionado' : ' itens adicionados') + ' ao prontuário e ao bloco de emergência');
+    if (typeof render === 'function') render();
+  };
+
+  /* ─────────── 3. Registro de acessos de emergência ─────────── */
+
+  function getLog() {
+    try { return JSON.parse(Store.get(KEY_LOG) || '[]'); } catch (e) { return []; }
+  }
+  function addLog(reg) {
+    var l = getLog(); l.unshift(reg);
+    Store.set(KEY_LOG, JSON.stringify(l.slice(0, 50)));
+  }
+
+  var ativarOrig = window.doActivateDoctorEmg;
+  if (typeof ativarOrig === 'function') {
+    window.doActivateDoctorEmg = function () {
+      var r = ativarOrig.apply(this, arguments);
+      try {
+        var pac = S.emgPatient;
+        if (pac) {
+          var crm = S.emgCRM || '';
+          var docs = getDoctors();
+          var nome = (docs[crm] && docs[crm].name) || 'Profissional não identificado';
+          addLog({
+            code: S.emgCodeUsed || pac.code || '',
+            crm: crm, doctor: nome,
+            unit: S.emgUnit || '', protocol: S.emgProtocol || '',
+            at: new Date().toISOString()
+          });
+        }
+      } catch (e) { console.error('[osiris]', e); }
+      return r;
+    };
+  }
+
+  function quando(iso) {
+    var d = new Date(iso), ag = new Date();
+    var min = Math.round((ag - d) / 60000);
+    var hora = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+    if (min < 1) return 'agora mesmo';
+    if (min < 60) return 'há ' + min + ' min';
+    if (d.toDateString() === ag.toDateString()) return 'hoje, ' + hora;
+    return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + ', ' + hora;
+  }
+
+  /* ─────────── Blocos na tela do paciente ─────────── */
+
+  function blocoCodigo() {
+    var code = codigoDoUsuario();
+    if (!code) return '';
+    return '<div class="sect-hd"><h2>Seu código de emergência</h2></div>' +
+      '<div class="card" style="cursor:default;background:linear-gradient(135deg,#0F6E56,#1D9E75);border:0">' +
+      '<div style="color:rgba(255,255,255,.85);font-size:12px;line-height:1.5">' +
+      'Um profissional com CRM usa este código para abrir seu prontuário de emergência</div>' +
+      '<div style="display:flex;align-items:center;gap:10px;margin-top:10px">' +
+      '<div style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:29px;font-weight:800;' +
+      'letter-spacing:4px;color:#fff">' + code + '</div>' +
+      '<button onclick="osirisCopiarCodigo()" style="margin-left:auto;padding:9px 15px;border:0;' +
+      'border-radius:10px;background:rgba(255,255,255,.22);color:#fff;font-size:12px;font-weight:700">Copiar</button>' +
+      '</div>' +
+      '<div style="color:rgba(255,255,255,.75);font-size:11.5px;margin-top:10px;line-height:1.5">' +
+      'Guarde na carteira ou no contato de emergência do celular. A pulseira NFC carrega o mesmo código.</div></div>';
+  }
+
+  window.osirisCopiarCodigo = function () {
+    var code = codigoDoUsuario();
+    if (!code) return;
+    try {
+      navigator.clipboard.writeText(code).then(function () { aviso('Código copiado'); },
+        function () { aviso('Seu código é ' + code); });
+    } catch (e) { aviso('Seu código é ' + code); }
+  };
+
+  function blocoUpload() {
+    return '<div class="sect-hd"><h2>Documentos</h2></div>' +
+      '<div class="card" style="cursor:pointer" onclick="osirisUpload()">' +
+      '<div style="display:flex;gap:12px;align-items:center">' +
+      '<div style="width:42px;height:42px;border-radius:11px;background:#0f6e56;color:#fff;' +
+      'display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">+</div>' +
+      '<div><div style="font-size:14px;font-weight:700">Enviar laudo ou exame em PDF</div>' +
+      '<div style="font-size:12px;color:var(--text-400);margin-top:2px">' +
+      'Atualiza seu prontuário e o bloco de emergência</div></div></div></div>';
+  }
+
+  function blocoProntuario() {
+    var code = codigoDoUsuario(); if (!code) return '';
+    var rec = (getMed() || {})[code]; if (!rec) return '';
+
+    function lista(titulo, arr, render) {
+      if (!arr || !arr.length) return '';
+      return '<div style="font-size:11.5px;font-weight:800;text-transform:uppercase;' +
+        'color:var(--text-400);letter-spacing:.4px;margin:12px 0 6px">' + titulo + '</div>' +
+        arr.map(render).join('');
+    }
+    function selo(x) {
+      return x.origem === 'documento'
+        ? '<span class="chip" style="background:#e2e8f0;color:#475569">documento</span>'
+        : '<span class="chip" style="background:#d1fae5;color:#065f46">validado</span>';
+    }
+
+    var h = '<div class="sect-hd"><h2>Meu prontuário</h2></div><div class="card" style="cursor:default">';
+    h += '<div style="display:flex;justify-content:space-between;font-size:13px">' +
+      '<span style="color:var(--text-400)">Tipo sanguíneo</span><b>' + (rec.bloodType || '—') + '</b></div>';
+    h += lista('Alergias', rec.allergies, function (x) {
+      var c = x.severity === 'GRAVE' ? 'red' : (x.severity === 'MODERADA' ? 'amber' : 'green');
+      return '<div style="padding:7px 0;border-top:1px solid var(--border)">' +
+        '<div style="font-size:13px;font-weight:700">' + x.name + '</div>' +
+        '<div class="chips"><span class="badge badge-' + c + '">' + x.severity + '</span>' + selo(x) + '</div></div>';
+    });
+    h += lista('Condições', rec.conditions, function (x) {
+      return '<div style="padding:7px 0;border-top:1px solid var(--border)">' +
+        '<div style="font-size:13px;font-weight:700">' + x.name + '</div>' +
+        '<div class="chips"><span class="chip">' + (x.status || '') + '</span>' + selo(x) + '</div></div>';
+    });
+    h += lista('Medicações', rec.medications, function (x) {
+      return '<div style="padding:7px 0;border-top:1px solid var(--border)">' +
+        '<div style="font-size:13px;font-weight:700">' + x.name + '</div>' +
+        '<div class="chips"><span class="chip">' + (x.freq || '') + '</span>' + selo(x) + '</div></div>';
+    });
+    if (!(rec.allergies || []).length && !(rec.conditions || []).length && !(rec.medications || []).length) {
+      h += '<div style="font-size:12.5px;color:var(--text-400);margin-top:10px;line-height:1.5">' +
+        'Prontuário ainda vazio. Envie um laudo em PDF para preencher.</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function blocoEmergencias() {
+    var code = codigoDoUsuario(); if (!code) return '';
+    var regs = getLog().filter(function (r) { return r.code === code; }).slice(0, 5);
+    if (!regs.length) return '';
+
+    return '<div class="sect-hd"><h2>Emergências recentes</h2></div>' +
+      regs.map(function (r) {
+        return '<div class="card" style="cursor:default;border-left:3px solid var(--red-400)">' +
+          '<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">' +
+          '<div><div style="font-size:14px;font-weight:700">' + r.doctor + '</div>' +
+          '<div style="font-size:12px;color:var(--text-400);margin-top:2px">CRM ' + (r.crm || '—') +
+          (r.unit ? ' · ' + r.unit : '') + '</div></div>' +
+          '<div style="font-size:11.5px;color:var(--text-400);white-space:nowrap">' + quando(r.at) + '</div></div>' +
+          '<div class="chips"><span class="chip">' + (r.protocol || '') + '</span>' +
+          '<span class="chip" style="background:#fee2e2;color:#991b1b">acesso de emergência</span></div></div>';
+      }).join('');
+  }
+
+  var homeOrig = window.patientHome;
+  if (typeof homeOrig === 'function') {
+    window.patientHome = function () {
+      var html = homeOrig.apply(this, arguments);
+      var extra = blocoCodigo() + blocoEmergencias() + blocoUpload() + blocoProntuario();
+      var alvo = '<div class="sect-hd"><h2>Monitoramento de Sinais Vitais</h2></div>';
+      return html.indexOf(alvo) >= 0 ? html.replace(alvo, extra + alvo) : html + extra;
+    };
+  }
+})();
 </script>
 </body>
 </html>
