@@ -25,6 +25,12 @@ jobs:
 
       - name: Instalar Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # O padrao da action e "tools platform-tools". O Google removeu o
+          # pacote legado "tools" do repositorio do SDK em 14/09/2026 e o
+          # sdkmanager passou a sair com erro em vez de so avisar.
+          # Pedir apenas platform-tools evita a falha.
+          packages: 'platform-tools'
 
       - name: Conferir se os arquivos necessarios existem
         run: |
