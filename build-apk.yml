@@ -25,6 +25,12 @@ jobs:
 
       - name: Instalar Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # O padrao da action e "tools platform-tools". O Google removeu o
+          # pacote legado "tools" do repositorio do SDK em 14/09/2026 e o
+          # sdkmanager passou a sair com erro em vez de so avisar.
+          # Pedir apenas platform-tools evita a falha.
+          packages: 'platform-tools'
 
       - name: Conferir se os arquivos necessarios existem
         run: |
@@ -137,18 +143,27 @@ jobs:
           echo "--- plugins registrados no APK ---"
           cat "$ARQ"
           echo "----------------------------------"
+
+          # Essenciais: sem eles o app nao cumpre a funcao. Derruba o build.
           FALTOU=0
-          grep -q "capacitor-nfc" "$ARQ" || { echo "FALTA: @capgo/capacitor-nfc"; FALTOU=1; }
-          grep -q "native-biometric" "$ARQ" || { echo "FALTA: @capgo/capacitor-native-biometric"; FALTOU=1; }
-          grep -q "capacitor/app" "$ARQ" || { echo "FALTA: @capacitor/app"; FALTOU=1; }
+          grep -q "capacitor-nfc" "$ARQ" || { echo "ERRO — FALTA: @capgo/capacitor-nfc"; FALTOU=1; }
+          grep -q "capacitor/app"  "$ARQ" || { echo "ERRO — FALTA: @capacitor/app"; FALTOU=1; }
           if [ "$FALTOU" = "1" ]; then
-            echo ""
-            echo "Um ou mais plugins nao entraram no build."
-            echo "Confira o bloco 'npm install' deste workflow: cada linha"
-            echo "precisa terminar com \\ menos a ultima."
+            echo "Plugin essencial ausente. Interrompendo."
             exit 1
           fi
-          echo "Todos os plugins obrigatorios presentes."
+
+          # Opcional: avisa alto, mas NAO impede a geracao do APK.
+          if grep -q "native-biometric" "$ARQ"; then
+            echo "OK — biometria presente."
+          else
+            echo ""
+            echo "=================================================="
+            echo "  AVISO: @capgo/capacitor-native-biometric AUSENTE"
+            echo "  O APK sera gerado e funcionara, mas a digital"
+            echo "  nao sera pedida no protocolo de emergencia."
+            echo "=================================================="
+          fi
 
       - name: Compilar o APK
         run: |
