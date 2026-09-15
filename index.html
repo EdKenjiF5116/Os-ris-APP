@@ -3069,9 +3069,120 @@ if(document.readyState==='loading'){
       }).join('');
   }
 
+  /* ─────────── 4. Teclado e rolagem estáveis ─────────── */
+
+  // O app chama render() a cada tecla nos campos de senha e de código,
+  // refazendo o innerHTML inteiro. O foco era devolvido num setTimeout,
+  // o que no Android fecha e reabre o teclado e joga a rolagem pro topo.
+  // Aqui o foco, a posição do cursor e a rolagem voltam de forma síncrona.
+  var renderOrig = window.render;
+  if (typeof renderOrig === 'function') {
+    window.render = function () {
+      var ativo = document.activeElement;
+      var ehCampo = ativo && (ativo.tagName === 'INPUT' || ativo.tagName === 'TEXTAREA');
+      var id = ehCampo ? ativo.id : null;
+      var ini = null, fim = null;
+      if (ehCampo) { try { ini = ativo.selectionStart; fim = ativo.selectionEnd; } catch (e) {} }
+
+      var painel = document.getElementById('app');
+      var rolagemPainel = painel ? painel.scrollTop : 0;
+      var rolagemJanela = window.scrollY || window.pageYOffset || 0;
+
+      var r = renderOrig.apply(this, arguments);
+
+      if (id) {
+        var campo = document.getElementById(id);
+        if (campo && campo !== document.activeElement) {
+          try {
+            // preventScroll evita o salto de viewport que fecha o teclado
+            campo.focus({ preventScroll: true });
+            if (ini !== null && campo.setSelectionRange) {
+              campo.setSelectionRange(ini, fim);
+            }
+          } catch (e) {}
+        }
+      }
+      if (painel && rolagemPainel) painel.scrollTop = rolagemPainel;
+      if (rolagemJanela) window.scrollTo(0, rolagemJanela);
+      return r;
+    };
+  }
+
+  /* ─────────── 5. Paciente novo começa vazio ─────────── */
+
+  // Marca quais prontuários são os de demonstração. Sem isso, um usuário
+  // recém-cadastrado via as telas fixas com glicemia 142, gráficos e
+  // histórico da Maria — dados que não são dele.
+  function marcarDemo() {
+    try {
+      var db = getMed() || {}, mudou = false;
+      for (var code in PATIENTS_MED) {
+        if (db[code] && db[code].demo !== true) { db[code].demo = true; mudou = true; }
+      }
+      if (mudou) setMed(db);
+    } catch (e) { console.error('[osiris]', e); }
+  }
+  marcarDemo();
+
+  function ehDemo() {
+    var code = codigoDoUsuario();
+    if (!code) return true;
+    var rec = (getMed() || {})[code];
+    return !!(rec && rec.demo);
+  }
+
+  function caixaVazia(msg) {
+    return '<div class="card" style="cursor:default;text-align:center;padding:26px 18px">' +
+      '<div style="font-size:14px;font-weight:700;margin-bottom:6px">Nada registrado ainda</div>' +
+      '<div style="font-size:12.5px;color:var(--text-400);line-height:1.55">' + msg + '</div>' +
+      '<button onclick="osirisUpload()" style="margin-top:16px;padding:12px 20px;border:0;' +
+      'border-radius:12px;background:#0F6E56;color:#fff;font-size:13px;font-weight:700">' +
+      'Enviar laudo em PDF</button></div>';
+  }
+
+  function paginaVazia(titulo, msg) {
+    return '<div class="page"><div class="page-hd"><h1>' + titulo + '</h1></div>' +
+      caixaVazia(msg) + '</div>';
+  }
+
+  // Abas que hoje mostram conteúdo fixo de demonstração
+  var VAZIAS = {
+    patientAppointments: ['Consultas', 'Suas consultas aparecem aqui conforme forem registradas.'],
+    patientExams: ['Exames', 'Envie um laudo ou exame em PDF para começar seu histórico.'],
+    patientHistory: ['Histórico', 'Seu histórico médico é montado a partir dos documentos enviados.'],
+    patientVaccines: ['Vacinas', 'Nenhuma vacina registrada no seu prontuário.'],
+    patientDoctors: ['Médicos', 'Nenhum profissional vinculado ao seu prontuário ainda.'],
+    patientInsurance: ['Convênio', 'Nenhum convênio cadastrado.']
+  };
+
+  Object.keys(VAZIAS).forEach(function (fn) {
+    var orig = window[fn];
+    if (typeof orig !== 'function') return;
+    window[fn] = function () {
+      if (ehDemo()) return orig.apply(this, arguments);
+      return paginaVazia(VAZIAS[fn][0], VAZIAS[fn][1]);
+    };
+  });
+
+  function homeVazia() {
+    var nome = (S.user && S.user.name) ? S.user.name.split(' ')[0] : 'Paciente';
+    var code = codigoDoUsuario();
+    var rec = code ? (getMed() || {})[code] : null;
+    var temDados = rec && ((rec.allergies || []).length || (rec.conditions || []).length ||
+                           (rec.medications || []).length);
+    return '<div class="page">' +
+      '<div class="page-hd"><h1>Olá, ' + nome + '! 👋</h1>' +
+      '<p>' + (temDados ? 'Seu prontuário de emergência está ativo'
+                        : 'Seu prontuário está pronto para ser preenchido') + '</p></div>' +
+      blocoCodigo() + blocoEmergencias() + blocoUpload() + blocoProntuario() +
+      '</div>';
+  }
+
   var homeOrig = window.patientHome;
   if (typeof homeOrig === 'function') {
     window.patientHome = function () {
+      // Usuário criado no app: nada de dados fixos de demonstração
+      if (!ehDemo()) return homeVazia();
       var html = homeOrig.apply(this, arguments);
       var extra = blocoCodigo() + blocoEmergencias() + blocoUpload() + blocoProntuario();
       var alvo = '<div class="sect-hd"><h2>Monitoramento de Sinais Vitais</h2></div>';
